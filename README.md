@@ -115,6 +115,3 @@ npm test
 2. Os dados não sincronizam entre dispositivos. A exportação e a importação cobrem a transferência manual.
 3. As estimativas de passos das micro-etapas são sugestões por regras, sem uso de inteligência artificial.
 4. Possíveis evoluções: lembretes por horário, tarefas recorrentes, modo de leitura para os artigos e tradução da interface.
-## Licença
-
-Distribuído sob a licença MIT. Consulte o arquivo `LICENSE`.
