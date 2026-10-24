@@ -1,0 +1,72 @@
+/* Tokens de design e temas. Todas as cores da interface partem destas variáveis. */
+:root {
+  color-scheme: light;
+
+  --primary-color: #4f46e5;
+  --primary-dark: #4338ca;
+  --primary-light: #6366f1;
+  --primary-text: var(--primary-dark);
+  --on-primary: #ffffff;
+  --sidebar-from: #3730a3;
+  --sidebar-to: #4f46e5;
+
+  --secondary-color: #7c3aed;
+  --accent-color: #0891b2;
+  --success-color: #059669;
+  --warning-color: #b45309;
+  --danger-color: #dc2626;
+
+  --background-color: #f8fafc;
+  --surface-color: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --text-light: #64748b;
+  --border-color: #e2e8f0;
+  --inset-color: color-mix(in srgb, var(--text-primary) 5%, var(--surface-color));
+  --overlay-color: rgba(15, 23, 42, 0.55);
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.12);
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: Georgia, "Times New Roman", serif;
+  --font-body: var(--font-sans);
+
+  --space-line: 1.6;
+  --space-letter: 0;
+  --transition: 0.2s ease;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --primary-text: color-mix(in srgb, var(--primary-color) 45%, #ffffff);
+  --background-color: #0f172a;
+  --surface-color: #1e293b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-light: #94a3b8;
+  --border-color: #334155;
+  --overlay-color: rgba(2, 6, 23, 0.7);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 8px -1px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 12px 24px -3px rgba(0, 0, 0, 0.5);
+}
+
+:root[data-theme="sepia"] {
+  --background-color: #f4ecd8;
+  --surface-color: #fbf5e6;
+  --text-primary: #433422;
+  --text-secondary: #5f4e3a;
+  --text-light: #7a6650;
+  --border-color: #e0d2b4;
+}
+
+:root[data-font="serif"] {
+  --font-body: var(--font-serif);
+}

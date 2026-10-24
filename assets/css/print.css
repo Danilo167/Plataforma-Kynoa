@@ -1,0 +1,18 @@
+/* Impressão: mantém apenas o conteúdo da aba atual. */
+@media print {
+  .sidebar,
+  .toast-region,
+  .focus-bar,
+  .skip-link,
+  .task-actions,
+  .btn {
+    display: none !important;
+  }
+
+  .layout { display: block; max-width: none; }
+  .main-content { padding: 0; }
+  .section { box-shadow: none; border: none; padding: 0; }
+  .tab { display: none !important; }
+  .tab.active { display: block !important; }
+  body { background: #ffffff; color: #000000; }
+}

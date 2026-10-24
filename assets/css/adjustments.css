@@ -1,0 +1,58 @@
+/* Ajustes sensoriais controlados pelo usuário (atributos data-* no elemento html). */
+
+/* Reduzir animações: preferência do usuário ou do sistema operacional. */
+:root[data-reduce-motion="true"] *,
+:root[data-reduce-motion="true"] *::before,
+:root[data-reduce-motion="true"] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+:root[data-reduce-motion="true"] .card:hover,
+:root[data-reduce-motion="true"] .btn:hover,
+:root[data-reduce-motion="true"] .menu-button:hover {
+  transform: none !important;
+}
+
+:root[data-reduce-motion="true"] {
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: 0 0 0 1px var(--border-color);
+}
+
+/* Cores mais suaves: reduz a saturação do conteúdo. */
+:root[data-soft-colors="true"] .layout {
+  filter: saturate(0.65);
+}
+
+/* Menos contraste: suaviza texto e bordas sem comprometer a leitura. */
+:root[data-low-contrast="true"] {
+  --text-primary: color-mix(in srgb, var(--text-primary) 82%, var(--surface-color));
+  --text-secondary: color-mix(in srgb, var(--text-secondary) 85%, var(--surface-color));
+  --border-color: color-mix(in srgb, var(--border-color) 60%, var(--surface-color));
+}
+
+/* Espaçamento ampliado: ajuda na leitura para quem tem dificuldade com texto denso. */
+:root[data-spacious="true"] {
+  --space-line: 1.9;
+  --space-letter: 0.02em;
+}
+
+:root[data-spacious="true"] p,
+:root[data-spacious="true"] li {
+  word-spacing: 0.08em;
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --border-color: #64748b;
+  }
+}
+
+@media (forced-colors: active) {
+  .btn, .form-control, .card, .task-item, .sound-btn, .theme-card {
+    border: 1px solid CanvasText;
+  }
+}

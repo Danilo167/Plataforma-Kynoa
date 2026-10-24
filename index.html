@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light" data-font="sans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Início | Kynoa</title>
+  <meta name="description" content="Kynoa é um sistema de organização totalmente personalizável para pessoas neurodivergentes: tarefas, micro-etapas, foco, ambiente sensorial e muito mais.">
+  <meta name="theme-color" content="#4338ca">
+  <meta property="og:title" content="Kynoa - Sistema personalizado para neurodivergentes">
+  <meta property="og:description" content="Organize tarefas, foco e ambiente sensorial do seu jeito.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
+
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/adjustments.css">
+  <link rel="stylesheet" href="assets/css/print.css">
+
+  <script src="assets/js/core/utils.js" defer></script>
+  <script src="assets/js/core/icons.js" defer></script>
+  <script src="assets/js/core/storage.js" defer></script>
+  <script src="assets/js/core/store.js" defer></script>
+  <script src="assets/js/core/audio.js" defer></script>
+  <script src="assets/js/ui/toast.js" defer></script>
+  <script src="assets/js/ui/notify.js" defer></script>
+  <script src="assets/js/ui/dialog.js" defer></script>
+  <script src="assets/js/ui/router.js" defer></script>
+  <script src="assets/js/data/content.js" defer></script>
+  <script src="assets/js/features/categories.js" defer></script>
+  <script src="assets/js/features/projects.js" defer></script>
+  <script src="assets/js/features/tasks.js" defer></script>
+  <script src="assets/js/features/microsteps.js" defer></script>
+  <script src="assets/js/features/focus.js" defer></script>
+  <script src="assets/js/features/ambient.js" defer></script>
+  <script src="assets/js/features/environment.js" defer></script>
+  <script src="assets/js/features/personalization.js" defer></script>
+  <script src="assets/js/features/community.js" defer></script>
+  <script src="assets/js/features/resources.js" defer></script>
+  <script src="assets/js/features/settings.js" defer></script>
+  <script src="assets/js/features/dashboard.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <noscript><p style="padding:24px">O Kynoa precisa de JavaScript ativado para funcionar.</p></noscript>
+
+  <div class="layout">
+
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">K</div>
+          <h1>Kynoa</h1>
+        </div>
+        <p class="subtitle">Sistema personalizado para pessoas neurodivergentes</p>
+      </div>
+
+      <nav class="menu" aria-label="Principal">
+        <a class="menu-button active" href="#inicio" data-tab="inicio"><span class="menu-icon"><svg class="icon" aria-hidden="true"><use href="#i-home"></use></svg></span> Início</a>
+        <a class="menu-button" href="#personalizacao" data-tab="personalizacao"><span class="menu-icon"><svg class="icon" aria-hidden="true"><use href="#i-palette"></use></svg></span> Personalização</a>
+        <a class="menu-button" href="#categorias" data-tab="categorias"><span class="menu-icon"><svg class="icon" aria-hidden="true"><use href="#i-tag"></use></svg></span> Meu Sistema</a>
+        <a class="menu-button" href="#tarefas" data-tab="tarefas"><span class="menu-icon"><svg class="icon" aria-hidden="true"><use href="#i-tasks"></use></svg></span> Tarefas</a>
+        <a class="menu-button" href="#microetapas" data-tab="microetapas"><span class="menu-icon"><svg class="icon" aria-hidden="true"><use href="#i-steps"></use></svg></span> Micro-etapas</a>
+        <a class="menu-button" href="#foco" data-tab="foco"><span class="menu-icon"><svg class="icon" aria-hidden="true"><use href="#i-timer"></use></svg></span> Foco</a>
+        <a class="menu-button" href="#ambiente" data-tab="ambiente"><span class="menu-icon"><svg class="icon" aria-hidden="true"><use href="#i-leaf"></use></svg></span> Ambiente</a>
+        <a class="menu-button" href="#comunidade" data-tab="comunidade"><span class="menu-icon"><svg class="icon" aria-hidden="true"><use href="#i-chat"></use></svg></span> Comunidade</a>
+        <a class="menu-button" href="#recursos" data-tab="recursos"><span class="menu-icon"><svg class="icon" aria-hidden="true"><use href="#i-book"></use></svg></span> Recursos</a>
+        <a class="menu-button" href="#configuracoes" data-tab="configuracoes"><span class="menu-icon"><svg class="icon" aria-hidden="true"><use href="#i-settings"></use></svg></span> Configurações</a>
+      </nav>
+
+      <div class="user-status">
+        <div class="status-indicator">
+          <div class="status-dot" id="statusDot"></div>
+          <span id="statusText">Status: Disponível</span>
+        </div>
+        <small id="nextBreak">Próxima pausa: quando precisar</small>
+      </div>
+    </aside>
+
+    <main class="main-content" id="conteudo" tabindex="-1">
+
+      <!-- Início -->
+      <section id="inicio" class="tab active" aria-labelledby="welcomeTitle">
+        <div class="section">
+          <div class="section-header">
+            <h2 id="welcomeTitle">Bem-vinde ao Kynoa</h2>
+            <p>Seu espaço de organização totalmente personalizável. Você começa do zero e constrói do seu jeito.</p>
+          </div>
+
+          <div class="grid-4 mb-4">
+            <div class="card static stat-card"><div class="stat-value" id="statPending">0</div><div class="stat-label">tarefas pendentes</div></div>
+            <div class="card static stat-card"><div class="stat-value" id="statDone">0</div><div class="stat-label">concluídas hoje</div></div>
+            <div class="card static stat-card"><div class="stat-value" id="statSessions">0</div><div class="stat-label">sessões de foco hoje</div></div>
+            <div class="card static stat-card"><div class="stat-value" id="statMinutes">0 min</div><div class="stat-label">de foco hoje</div></div>
+          </div>
+
+          <div class="card static mb-4">
+            <h3 class="card-title">Como está sua energia hoje?</h3>
+            <div class="flex-group mb-2" id="energyButtons" role="group" aria-label="Nível de energia de hoje"></div>
+            <div id="energySuggestions" aria-live="polite"></div>
+          </div>
+
+          <div class="grid-3 mb-4">
+            <div class="card">
+              <h3 class="card-title">Comece personalizando</h3>
+              <p>Crie seu próprio sistema de categorias, cores e organização que faça sentido para você.</p>
+              <button type="button" class="btn btn-primary mt-2 w-100" data-goto="personalizacao">Começar</button>
+            </div>
+            <div class="card">
+              <h3 class="card-title">Configure seu ambiente</h3>
+              <p>Ajuste cores, sons e estímulos visuais para criar um espaço confortável para você.</p>
+              <button type="button" class="btn btn-secondary mt-2 w-100" data-goto="ambiente">Personalizar</button>
+            </div>
+            <div class="card">
+              <h3 class="card-title">Siga seu ritmo</h3>
+              <p>Use timers adaptáveis e técnicas que respeitem seu ciclo de atenção.</p>
+              <button type="button" class="btn btn-secondary mt-2 w-100" data-goto="foco">Explorar</button>
+            </div>
+          </div>
+
+          <div class="card static is-optional">
+            <h3 class="card-title">Primeiros passos (opcional)</h3>
+            <div class="grid-3">
+              <button type="button" class="task-item first-step" data-goto="categorias"><span class="task-title">Criar minhas categorias</span><span class="task-description">Defina como quer organizar seus projetos e tarefas</span></button>
+              <button type="button" class="task-item first-step" data-goto="tarefas"><span class="task-title">Adicionar primeira tarefa</span><span class="task-description">Comece simples, sem pressão</span></button>
+              <button type="button" class="task-item first-step" data-goto="ambiente"><span class="task-title">Ajustar ambiente sensorial</span><span class="task-description">Configure cores, sons e estímulos</span></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Personalização -->
+      <section id="personalizacao" class="tab" aria-labelledby="personalizacao-title">
+        <div class="section">
+          <div class="section-header">
+            <h2 id="personalizacao-title">Personalização do sistema</h2>
+            <p>Construa seu sistema de organização do zero, do seu jeito</p>
+          </div>
+
+          <div class="grid-2">
+            <div>
+              <h3 class="mb-2">Como você prefere organizar?</h3>
+              <div class="form-group">
+                <label class="form-label" for="organizationStyle">Estilo de organização</label>
+                <select class="form-control" id="organizationStyle">
+                  <option value="">Escolha uma opção ou crie a sua</option>
+                  <option value="visual">Visual (cores, ícones)</option>
+                  <option value="textual">Textual (listas, descrições)</option>
+                  <option value="temporal">Por tempo e prazos</option>
+                  <option value="projetos">Por projetos e temas</option>
+                  <option value="mista">Mista (combinação)</option>
+                  <option value="custom">Quero criar meu próprio estilo</option>
+                </select>
+                <span class="form-hint" id="styleHint" hidden></span>
+              </div>
+
+              <div class="form-group" id="customStyleContainer" hidden>
+                <label class="form-label" for="customStyle">Descreva seu estilo de organização</label>
+                <textarea class="form-control" id="customStyle" placeholder="Ex.: gosto de organizar por energia (alta e baixa), por contexto (casa e trabalho), por prioridade emocional..."></textarea>
+              </div>
+
+              <h3 class="mb-2 mt-4">Preferências de neurodiversidade</h3>
+              <div class="task-list no-scroll">
+                <div class="option-row"><label for="sensoryOverload">Prefiro evitar sobrecarga sensorial</label><input type="checkbox" id="sensoryOverload"></div>
+                <div class="option-row"><label for="frequentBreaks">Preciso de pausas frequentes</label><input type="checkbox" id="frequentBreaks"></div>
+                <div class="option-row"><label for="timeEstimates">Tenho dificuldade com estimativas de tempo</label><input type="checkbox" id="timeEstimates"></div>
+                <div class="option-row"><label for="flexibleStructure">Funciono melhor com estrutura flexível</label><input type="checkbox" id="flexibleStructure"></div>
+              </div>
+
+              <button type="button" class="btn btn-primary mt-3" data-action="save-personalization">Salvar preferências</button>
+            </div>
+
+            <div>
+              <h3 class="mb-2">Sugestões baseadas nas suas preferências</h3>
+              <div id="suggestionsContainer" aria-live="polite"></div>
+
+              <div class="card static mt-3 is-optional">
+                <h3 class="card-title">Princípios inclusivos</h3>
+                <ul>
+                  <li>Não há maneira "certa" de organizar</li>
+                  <li>Seu sistema deve servir a você, não o contrário</li>
+                  <li>Pode ser tão simples ou complexo quanto você precisar</li>
+                  <li>Pode mudar a qualquer momento</li>
+                  <li>É sobre funcionalidade, não aparência</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Meu Sistema (categorias e projetos) -->
+      <section id="categorias" class="tab" aria-labelledby="categorias-title">
+        <div class="section">
+          <div class="section-header">
+            <h2 id="categorias-title">Meu sistema de categorias</h2>
+            <p>Crie e gerencie suas próprias categorias, cores e organização</p>
+          </div>
+
+          <div class="grid-2 mb-4">
+            <form id="category-form" novalidate>
+              <h3 class="mb-2">Criar nova categoria</h3>
+              <input type="hidden" id="categoryId">
+              <div class="form-group">
+                <label class="form-label" for="categoryName">Nome da categoria</label>
+                <input type="text" class="form-control" id="categoryName" maxlength="60" placeholder="Ex.: Estudos, Saúde, Trabalho, Pessoal...">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="categoryDescription">Descrição (opcional)</label>
+                <textarea class="form-control" id="categoryDescription" maxlength="240" placeholder="O que inclui esta categoria?"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="categoryColor">Cor da categoria</label>
+                <div class="flex-group">
+                  <input type="color" class="color-picker" id="categoryColor" value="#4f46e5">
+                  <span id="colorHex">#4f46e5</span>
+                  <div class="swatches" id="categorySwatches" role="group" aria-label="Cores sugeridas"></div>
+                </div>
+              </div>
+              <div class="form-group">
+                <span class="form-label" id="icon-label">Ícone (opcional)</span>
+                <div class="icon-picker" id="categoryIcons" role="radiogroup" aria-labelledby="icon-label"></div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="categoryPriority">Prioridade padrão</label>
+                <select class="form-control" id="categoryPriority">
+                  <option value="low">Baixa</option>
+                  <option value="medium" selected>Média</option>
+                  <option value="high">Alta</option>
+                  <option value="none">Sem prioridade</option>
+                </select>
+                <span class="form-hint">As tarefas da categoria herdam esta prioridade, a menos que você escolha outra.</span>
+              </div>
+              <div class="flex-group">
+                <button type="submit" class="btn btn-primary" id="category-submit">Criar categoria</button>
+                <button type="button" class="btn btn-ghost" id="category-cancel" data-action="category-cancel" hidden>Cancelar edição</button>
+              </div>
+            </form>
+
+            <div>
+              <h3 class="mb-2">Minhas categorias</h3>
+              <div class="task-list" id="categoriesList"></div>
+
+              <div class="mt-3 is-optional">
+                <h4>Como usar as categorias</h4>
+                <ul>
+                  <li>Use para filtrar tarefas</li>
+                  <li>Atribua cores que sejam confortáveis para você</li>
+                  <li>Reorganize a qualquer momento</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="card static">
+            <h3 class="card-title">Organização por projetos (opcional)</h3>
+            <div class="grid-2">
+              <form id="project-form" novalidate>
+                <h4 class="mb-2">Criar projeto</h4>
+                <div class="form-group">
+                  <label class="form-label" for="projectName">Nome do projeto</label>
+                  <input type="text" class="form-control" id="projectName" maxlength="80" placeholder="Nome do projeto">
+                </div>
+                <button type="submit" class="btn btn-secondary">Adicionar projeto</button>
+              </form>
+              <div>
+                <h4 class="mb-2">Meus projetos</h4>
+                <div class="task-list" id="projectsList"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tarefas -->
+      <section id="tarefas" class="tab" aria-labelledby="tarefas-title">
+        <div class="section">
+          <div class="section-header">
+            <h2 id="tarefas-title">Minhas tarefas</h2>
+            <p>Adicione e organize tarefas usando seu sistema personalizado</p>
+          </div>
+
+          <div class="grid-2">
+            <form id="task-form" novalidate>
+              <h3 class="mb-2">Nova tarefa</h3>
+              <input type="hidden" id="taskId">
+              <div class="form-group">
+                <label class="form-label" for="taskTitle">O que precisa fazer?</label>
+                <input type="text" class="form-control" id="taskTitle" maxlength="160" placeholder="Descreva de forma simples">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="taskDescription">Detalhes (opcional)</label>
+                <textarea class="form-control" id="taskDescription" maxlength="600" placeholder="Mais informações, se necessário"></textarea>
+              </div>
+              <div class="grid-2">
+                <div class="form-group">
+                  <label class="form-label" for="taskCategory">Categoria</label>
+                  <select class="form-control" id="taskCategory"></select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="taskProject">Projeto</label>
+                  <select class="form-control" id="taskProject"></select>
+                </div>
+              </div>
+              <div class="grid-2">
+                <div class="form-group">
+                  <label class="form-label" for="taskWhen">Quando?</label>
+                  <select class="form-control" id="taskWhen">
+                    <option value="today">Hoje</option>
+                    <option value="tomorrow">Amanhã</option>
+                    <option value="this_week">Esta semana</option>
+                    <option value="next_week">Próxima semana</option>
+                    <option value="someday">Algum dia</option>
+                    <option value="no_date">Sem data específica</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="taskPriority">Prioridade</label>
+                  <select class="form-control" id="taskPriority">
+                    <option value="">Padrão da categoria</option>
+                    <option value="high">Alta</option>
+                    <option value="medium">Média</option>
+                    <option value="low">Baixa</option>
+                    <option value="none">Sem prioridade</option>
+                  </select>
+                </div>
+              </div>
+              <div class="grid-2">
+                <div class="form-group">
+                  <label class="form-label" for="taskEnergy">Energia necessária</label>
+                  <select class="form-control" id="taskEnergy">
+                    <option value="low">Baixa energia</option>
+                    <option value="medium" selected>Energia média</option>
+                    <option value="high">Alta energia</option>
+                    <option value="varies">Varia</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="taskTimeAmount">Tempo estimado</label>
+                  <select class="form-control" id="taskTimeAmount">
+                    <option value="5">5 minutos</option>
+                    <option value="15">15 minutos</option>
+                    <option value="30" selected>30 minutos</option>
+                    <option value="45">45 minutos</option>
+                    <option value="60">1 hora</option>
+                    <option value="120">2 horas</option>
+                    <option value="unknown">Não sei</option>
+                  </select>
+                </div>
+              </div>
+              <div class="flex-group">
+                <button type="submit" class="btn btn-primary" id="task-submit">Adicionar tarefa</button>
+                <button type="button" class="btn btn-ghost" id="task-cancel" data-action="task-cancel" hidden>Cancelar edição</button>
+              </div>
+            </form>
+
+            <div>
+              <h3 class="mb-2">Minhas tarefas</h3>
+
+              <div class="segmented mb-2" id="taskFilters" role="group" aria-label="Filtrar tarefas">
+                <button type="button" class="btn btn-sm btn-secondary" data-action="task-filter" data-filter="all" aria-pressed="true">Todas</button>
+                <button type="button" class="btn btn-sm btn-secondary" data-action="task-filter" data-filter="today" aria-pressed="false">Hoje</button>
+                <button type="button" class="btn btn-sm btn-secondary" data-action="task-filter" data-filter="pending" aria-pressed="false">Pendentes</button>
+                <button type="button" class="btn btn-sm btn-secondary" data-action="task-filter" data-filter="completed" aria-pressed="false">Concluídas</button>
+              </div>
+
+              <div class="grid-2 mb-2">
+                <div>
+                  <label class="sr-only" for="taskSearch">Buscar tarefas</label>
+                  <input type="search" class="form-control" id="taskSearch" placeholder="Buscar tarefas">
+                </div>
+                <div>
+                  <label class="sr-only" for="taskSort">Ordenar por</label>
+                  <select class="form-control" id="taskSort">
+                    <option value="recent">Mais recentes</option>
+                    <option value="priority">Prioridade</option>
+                    <option value="when">Prazo</option>
+                    <option value="energy">Energia necessária</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="sr-only" for="taskFilterCategory">Filtrar por categoria</label>
+                  <select class="form-control" id="taskFilterCategory"></select>
+                </div>
+                <div>
+                  <label class="sr-only" for="taskFilterProject">Filtrar por projeto</label>
+                  <select class="form-control" id="taskFilterProject"></select>
+                </div>
+              </div>
+
+              <p class="form-hint mb-1" id="tasks-view-note" hidden></p>
+              <div class="task-list" id="tasksList"></div>
+
+              <div class="flex-group mt-3">
+                <button type="button" class="btn btn-secondary btn-sm" data-action="tasks-clear-completed">Limpar concluídas</button>
+                <button type="button" class="btn btn-danger btn-sm" data-action="tasks-clear-all">Limpar todas</button>
+                <div class="spacer"></div>
+                <span id="tasksCount" aria-live="polite">0 tarefas</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Micro-etapas -->
+      <section id="microetapas" class="tab" aria-labelledby="microetapas-title">
+        <div class="section">
+          <div class="section-header">
+            <h2 id="microetapas-title">Micro-etapas</h2>
+            <p>Quebre tarefas complexas em passos pequenos e gerenciáveis</p>
+          </div>
+
+          <div class="grid-2">
+            <form id="micro-form" novalidate>
+              <h3 class="mb-2">Criar micro-etapas</h3>
+              <div class="form-group">
+                <label class="form-label" for="mainTask">Tarefa principal</label>
+                <input type="text" class="form-control" id="mainTask" maxlength="160" placeholder="O que parece muito grande ou complexo?">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="microTaskLink">Vincular a uma tarefa (opcional)</label>
+                <select class="form-control" id="microTaskLink"></select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="taskDifficulty">Dificuldade percebida</label>
+                <select class="form-control" id="taskDifficulty">
+                  <option value="easy">Fácil</option>
+                  <option value="medium" selected>Médio</option>
+                  <option value="hard">Difícil</option>
+                  <option value="overwhelming">Sobrecarregante</option>
+                </select>
+                <span class="form-hint">A dificuldade muda a quantidade e o tamanho dos passos sugeridos.</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="microStepText">Novo passo</label>
+                <div class="inline-form">
+                  <input type="text" class="form-control" id="microStepText" maxlength="160" placeholder="Descreva este passo e tecle Enter">
+                  <button type="button" class="btn btn-primary" data-action="micro-add-step">Adicionar</button>
+                </div>
+              </div>
+              <button type="button" class="btn btn-success mb-3" data-action="micro-suggest">Sugerir passos</button>
+
+              <div id="microStepsContainer" class="mb-3"></div>
+
+              <div class="flex-group">
+                <button type="submit" class="btn btn-primary" id="micro-submit">Salvar micro-etapas</button>
+                <button type="button" class="btn btn-ghost" id="micro-cancel" data-action="micro-cancel" hidden>Cancelar edição</button>
+              </div>
+            </form>
+
+            <div>
+              <h3 class="mb-2">Minhas micro-etapas</h3>
+              <div id="savedMicroSteps"></div>
+
+              <div class="card static mt-3 is-optional">
+                <h3 class="card-title">Dicas para micro-etapas</h3>
+                <ul>
+                  <li>Comece com o passo mais simples</li>
+                  <li>Um passo pode ser apenas "pensar sobre"</li>
+                  <li>Você pode adicionar passos depois</li>
+                  <li>Celebre cada passo concluído</li>
+                  <li>Pausar entre os passos é permitido</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Foco -->
+      <section id="foco" class="tab" aria-labelledby="foco-title">
+        <div class="section">
+          <div class="section-header">
+            <h2 id="foco-title">Foco e ritmo</h2>
+            <p>Configure seu tempo de acordo com seu ciclo de atenção</p>
+          </div>
+
+          <div class="grid-2">
+            <div>
+              <h3 class="mb-2">Timer personalizado</h3>
+              <div class="timer" id="timer" role="timer" aria-live="off">
+                <svg class="timer-ring" viewBox="0 0 120 120" aria-hidden="true">
+                  <circle class="ring-bg" cx="60" cy="60" r="54"></circle>
+                  <circle class="ring-fg" id="timer-ring" cx="60" cy="60" r="54"></circle>
+                </svg>
+                <div class="timer-inner">
+                  <div class="timer-display" id="focusTimer">25:00</div>
+                  <div class="timer-phase" id="timerPhase">Pronto para começar</div>
+                </div>
+              </div>
+
+              <div class="timer-controls mb-3">
+                <button type="button" class="btn btn-primary" id="startFocus" data-action="focus-start"><svg class="icon" aria-hidden="true"><use href="#i-play"></use></svg> Iniciar</button>
+                <button type="button" class="btn btn-secondary" id="pauseFocus" data-action="focus-pause" disabled><svg class="icon" aria-hidden="true"><use href="#i-pause"></use></svg> <span id="pauseFocusLabel">Pausar</span></button>
+                <button type="button" class="btn btn-danger" id="stopFocus" data-action="focus-stop" disabled><svg class="icon" aria-hidden="true"><use href="#i-stop"></use></svg> Parar</button>
+              </div>
+
+              <div class="grid-2">
+                <div class="form-group">
+                  <label class="form-label" for="focusTime">Tempo de foco</label>
+                  <select class="form-control" id="focusTime">
+                    <option value="5">5 minutos</option>
+                    <option value="10">10 minutos</option>
+                    <option value="15">15 minutos</option>
+                    <option value="20">20 minutos</option>
+                    <option value="25" selected>25 minutos</option>
+                    <option value="30">30 minutos</option>
+                    <option value="45">45 minutos</option>
+                    <option value="60">60 minutos</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="breakTime">Tempo de pausa</label>
+                  <select class="form-control" id="breakTime">
+                    <option value="1">1 minuto</option>
+                    <option value="3">3 minutos</option>
+                    <option value="5" selected>5 minutos</option>
+                    <option value="10">10 minutos</option>
+                    <option value="15">15 minutos</option>
+                    <option value="custom">Personalizado</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group" id="customBreakGroup" hidden>
+                <label class="form-label" for="customBreak">Minutos de pausa personalizada</label>
+                <input type="number" class="form-control" id="customBreak" min="1" max="60" value="10">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="focusTaskSelect">Tarefa em foco (opcional)</label>
+                <select class="form-control" id="focusTaskSelect"></select>
+              </div>
+
+              <h4 class="mb-2">Configurações de ritmo</h4>
+              <div class="form-group">
+                <label class="form-label" for="attentionCycle">Meu ciclo de atenção é</label>
+                <select class="form-control" id="attentionCycle">
+                  <option value="short">Curto (5 a 15 minutos)</option>
+                  <option value="medium" selected>Médio (20 a 30 minutos)</option>
+                  <option value="long">Longo (45 minutos ou mais)</option>
+                  <option value="variable">Variável</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="breakReminders">Preciso de lembretes para pausar?</label>
+                <select class="form-control" id="breakReminders">
+                  <option value="yes">Sim, iniciar a pausa automaticamente</option>
+                  <option value="sometimes">Às vezes, perguntar a cada ciclo</option>
+                  <option value="no">Não, eu inicio a pausa quando quiser</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="mb-2">Técnicas de foco</h3>
+              <div class="card static mb-2">
+                <h4 class="card-title">Pomodoro adaptado</h4>
+                <p>Trabalhe em blocos de tempo que funcionem para você, não necessariamente 25 minutos.</p>
+                <button type="button" class="btn btn-sm btn-secondary mt-1" data-action="focus-preset" data-mode="pomodoro" aria-pressed="false">Experimentar (25 e 5)</button>
+              </div>
+              <div class="card static mb-2">
+                <h4 class="card-title">Time boxing</h4>
+                <p>Defina um tempo específico para uma tarefa, sem pressão para terminá-la.</p>
+                <button type="button" class="btn btn-sm btn-secondary mt-1" data-action="focus-preset" data-mode="timebox" aria-pressed="false">Experimentar (45 e 15)</button>
+              </div>
+              <div class="card static mb-3">
+                <h4 class="card-title">Sprints de energia</h4>
+                <p>Trabalhe quando tiver energia, descanse quando precisar.</p>
+                <button type="button" class="btn btn-sm btn-secondary mt-1" data-action="focus-preset" data-mode="sprint" aria-pressed="false">Experimentar (15 e 5)</button>
+              </div>
+
+              <h3 class="mb-2">Seu progresso</h3>
+              <div id="focusStats" class="mb-3"></div>
+
+              <div class="card static">
+                <h3 class="card-title">Sinais de foco</h3>
+                <p class="mb-2">O que ajuda você a entrar em estado de foco?</p>
+                <div class="task-list no-scroll" id="signalsList"></div>
+                <form id="signal-form" class="inline-form mt-2" novalidate>
+                  <label class="sr-only" for="signalText">Novo sinal de foco</label>
+                  <input type="text" class="form-control" id="signalText" maxlength="80" placeholder="Adicionar um sinal">
+                  <button type="submit" class="btn btn-secondary">Adicionar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Ambiente -->
+      <section id="ambiente" class="tab" aria-labelledby="ambiente-title">
+        <div class="section">
+          <div class="section-header">
+            <h2 id="ambiente-title">Ambiente sensorial</h2>
+            <p>Personalize cores, sons e estímulos visuais para seu conforto</p>
+          </div>
+
+          <div class="grid-2">
+            <div>
+              <h3 class="mb-2">Tema visual</h3>
+              <div class="grid-auto mb-3" id="themeCards" role="group" aria-label="Tema visual">
+                <button type="button" class="theme-card" data-action="set-theme" data-theme="auto" aria-pressed="false"><div class="theme-preview" style="background:linear-gradient(90deg,#f8fafc 50%,#0f172a 50%)"></div>Automático</button>
+                <button type="button" class="theme-card" data-action="set-theme" data-theme="light" aria-pressed="true"><div class="theme-preview" style="background:#f8fafc"></div>Claro</button>
+                <button type="button" class="theme-card" data-action="set-theme" data-theme="dark" aria-pressed="false"><div class="theme-preview" style="background:#0f172a"></div>Escuro</button>
+                <button type="button" class="theme-card" data-action="set-theme" data-theme="sepia" aria-pressed="false"><div class="theme-preview" style="background:#f4ecd8"></div>Sépia</button>
+              </div>
+
+              <h3 class="mb-2">Cores personalizadas</h3>
+              <div class="grid-2">
+                <div class="form-group">
+                  <label class="form-label" for="primaryColor">Cor principal</label>
+                  <input type="color" class="color-picker" id="primaryColor" value="#4f46e5">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="backgroundColor">Cor de fundo</label>
+                  <input type="color" class="color-picker" id="backgroundColor" value="#f8fafc">
+                </div>
+              </div>
+              <div class="flex-group">
+                <button type="button" class="btn btn-primary" data-action="apply-colors">Aplicar cores</button>
+                <button type="button" class="btn btn-ghost" data-action="clear-background">Remover fundo personalizado</button>
+              </div>
+
+              <h3 class="mb-2 mt-4">Controle de estímulos</h3>
+              <div class="task-list no-scroll">
+                <div class="option-row"><label for="reduceAnimations">Reduzir animações</label><input type="checkbox" id="reduceAnimations"></div>
+                <div class="option-row"><label for="softColors">Cores mais suaves</label><input type="checkbox" id="softColors"></div>
+                <div class="option-row"><label for="reduceContrast">Menos contraste</label><input type="checkbox" id="reduceContrast"></div>
+                <div class="option-row"><label for="sansSerif">Fonte sem serifa</label><input type="checkbox" id="sansSerif"></div>
+                <div class="option-row"><label for="spacious">Espaçamento ampliado no texto</label><input type="checkbox" id="spacious"></div>
+              </div>
+              <div class="form-group mt-2">
+                <label class="form-label" for="fontScale">Tamanho do texto</label>
+                <select class="form-control" id="fontScale">
+                  <option value="90">Menor</option>
+                  <option value="100" selected>Padrão</option>
+                  <option value="112">Maior</option>
+                  <option value="125">Muito maior</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="mb-2">Sons ambiente</h3>
+              <div class="sound-grid mb-2" id="soundGrid"></div>
+              <p class="form-hint mb-2" id="soundStatus" aria-live="polite">Nenhum som tocando.</p>
+
+              <div class="form-group">
+                <label class="form-label" for="soundVolume">Volume</label>
+                <div class="range-row">
+                  <input type="range" id="soundVolume" min="0" max="100" value="50">
+                  <span class="range-value" id="volumeValue">50%</span>
+                </div>
+              </div>
+              <button type="button" class="btn btn-danger w-100" data-action="sounds-stop"><svg class="icon" aria-hidden="true"><use href="#i-volume-off"></use></svg> Parar todos os sons</button>
+
+              <h3 class="mb-2 mt-4">Modo foco</h3>
+              <div class="card static">
+                <p>Esconde a navegação e os conteúdos opcionais para reduzir distrações. O cronômetro continua visível em uma barra flutuante.</p>
+                <button type="button" class="btn btn-primary w-100 mt-2" id="focusModeBtn" data-action="toggle-focus-mode" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-focus"></use></svg> <span id="focusModeLabel">Ativar modo foco</span></button>
+              </div>
+
+              <div class="card static mt-3">
+                <h3 class="card-title">Ambientes salvos</h3>
+                <p class="mb-2">Guarde o tema, os ajustes e os sons ativos para usar depois.</p>
+                <div class="flex-group mb-2">
+                  <button type="button" class="btn btn-primary" data-action="preset-save"><svg class="icon" aria-hidden="true"><use href="#i-save"></use></svg> Salvar ambiente atual</button>
+                  <button type="button" class="btn btn-ghost" data-action="env-reset"><svg class="icon" aria-hidden="true"><use href="#i-refresh"></use></svg> Restaurar padrão</button>
+                </div>
+                <div class="task-list no-scroll" id="presetsList"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Comunidade -->
+      <section id="comunidade" class="tab" aria-labelledby="comunidade-title">
+        <div class="section">
+          <div class="section-header">
+            <h2 id="comunidade-title">Comunidade</h2>
+            <p>Um espaço de conversa e troca, no seu ritmo</p>
+          </div>
+
+          <div class="grid-2 mb-4">
+            <form id="profile-form" novalidate>
+              <h3 class="mb-2">Seu perfil (opcional)</h3>
+              <div class="form-group">
+                <label class="form-label" for="userName">Como prefere ser chamade?</label>
+                <input type="text" class="form-control" id="userName" maxlength="40" placeholder="Nome, apelido ou deixe em branco">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="userPronouns">Pronomes (opcional)</label>
+                <select class="form-control" id="userPronouns">
+                  <option value="">Prefiro não informar</option>
+                  <option value="ele/dele">ele/dele</option>
+                  <option value="ela/dela">ela/dela</option>
+                  <option value="elu/delu">elu/delu</option>
+                  <option value="ile/dile">ile/dile</option>
+                  <option value="any">qualquer pronome</option>
+                  <option value="they">they/them (inglês)</option>
+                  <option value="custom">outro</option>
+                </select>
+              </div>
+              <div class="form-group" id="customPronounsContainer" hidden>
+                <label class="form-label" for="customPronouns">Seus pronomes</label>
+                <input type="text" class="form-control" id="customPronouns" maxlength="30" placeholder="Ex.: elx/delx, ela/elu">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="userInterests">Interesses (opcional)</label>
+                <input type="text" class="form-control" id="userInterests" maxlength="120" placeholder="Estudos, arte, tecnologia...">
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Atualizar perfil</button>
+              <span class="form-hint">O nome mostrado nas mensagens segue a visibilidade definida em Configurações.</span>
+            </form>
+
+            <div>
+              <h3 class="mb-2">Sala de conversa</h3>
+              <div class="chat-container">
+                <div class="chat-messages" id="chatMessages" aria-live="polite"></div>
+                <form id="chat-form" novalidate>
+                  <div class="form-group">
+                    <label class="sr-only" for="chatInput">Mensagem</label>
+                    <textarea class="form-control" id="chatInput" rows="2" maxlength="1000" placeholder="Digite sua mensagem (Enter envia, Shift e Enter quebra a linha)"></textarea>
+                  </div>
+                  <div class="flex-group">
+                    <button type="submit" class="btn btn-primary"><svg class="icon" aria-hidden="true"><use href="#i-send"></use></svg> Enviar</button>
+                    <button type="button" class="btn btn-ghost" data-action="chat-clear">Limpar sala</button>
+                    <div class="spacer"></div>
+                    <small id="onlineCount">1 sessão aberta neste navegador</small>
+                  </div>
+                </form>
+              </div>
+
+              <div class="card static mt-3">
+                <h3 class="card-title">Tópicos</h3>
+                <div class="segmented" id="roomButtons" role="group" aria-label="Salas">
+                  <button type="button" class="btn btn-sm btn-secondary" data-action="chat-room" data-room="general" aria-pressed="true">Geral</button>
+                  <button type="button" class="btn btn-sm btn-secondary" data-action="chat-room" data-room="tips" aria-pressed="false">Dicas</button>
+                  <button type="button" class="btn btn-sm btn-secondary" data-action="chat-room" data-room="support" aria-pressed="false">Apoio</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card static is-optional">
+            <h3 class="card-title">Princípios da comunidade</h3>
+            <ul>
+              <li>Respeito às diferenças e identidades</li>
+              <li>Sem julgamento sobre formas de organização</li>
+              <li>Espaço seguro para compartilhar experiências</li>
+              <li>Foco em soluções que funcionam para você</li>
+              <li>Participação opcional e no seu ritmo</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Recursos -->
+      <section id="recursos" class="tab" aria-labelledby="recursos-title">
+        <div class="section">
+          <div class="section-header">
+            <h2 id="recursos-title">Recursos e aprendizado</h2>
+            <p>Materiais sobre neurodiversidade e organização</p>
+          </div>
+
+          <div class="grid-3 mb-4">
+            <div class="card">
+              <h3 class="card-title">Para entender neurodiversidade</h3>
+              <ul>
+                <li>O que é neurodiversidade</li>
+                <li>TDAH, autismo, dislexia</li>
+                <li>Diferenças de processamento</li>
+                <li>Aceitação e acomodações</li>
+              </ul>
+              <button type="button" class="btn btn-secondary w-100 mt-2" data-action="resource-open" data-key="neurodiversity">Ler</button>
+            </div>
+            <div class="card">
+              <h3 class="card-title">Estratégias de organização</h3>
+              <ul>
+                <li>Sistemas visuais</li>
+                <li>Checklists adaptados</li>
+                <li>Gestão de tempo flexível</li>
+                <li>Lidando com sobrecarga</li>
+              </ul>
+              <button type="button" class="btn btn-secondary w-100 mt-2" data-action="resource-open" data-key="organization">Ler</button>
+            </div>
+            <div class="card">
+              <h3 class="card-title">Saúde e bem-estar</h3>
+              <ul>
+                <li>Autocuidado neurodivergente</li>
+                <li>Gerenciamento de energia</li>
+                <li>Limites</li>
+                <li>Apoio profissional</li>
+              </ul>
+              <button type="button" class="btn btn-secondary w-100 mt-2" data-action="resource-open" data-key="wellbeing">Ler</button>
+            </div>
+          </div>
+
+          <div class="card static">
+            <h3 class="card-title">Ferramentas para baixar</h3>
+            <div class="grid-2">
+              <div>
+                <h4 class="mb-1">Modelo de categorias</h4>
+                <p class="mb-1">Comece com um modelo básico e personalize. O arquivo pode ser importado em Configurações.</p>
+                <div class="flex-group">
+                  <button type="button" class="btn btn-sm btn-primary" data-action="download-template" data-type="categories"><svg class="icon" aria-hidden="true"><use href="#i-download"></use></svg> Baixar</button>
+                  <button type="button" class="btn btn-sm btn-secondary" data-action="apply-template">Aplicar agora</button>
+                </div>
+              </div>
+              <div>
+                <h4 class="mb-1">Guia de micro-etapas</h4>
+                <p class="mb-1">Como quebrar tarefas complexas, com exemplo e dicas.</p>
+                <button type="button" class="btn btn-sm btn-primary" data-action="download-template" data-type="microsteps"><svg class="icon" aria-hidden="true"><use href="#i-download"></use></svg> Baixar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card static mt-3">
+            <h3 class="card-title">Importante</h3>
+            <p>Estes recursos são sugestões. Nem tudo funcionará para todas as pessoas. Use o que fizer sentido para você, adapte ou ignore o que não servir.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Configurações -->
+      <section id="configuracoes" class="tab" aria-labelledby="configuracoes-title">
+        <div class="section">
+          <div class="section-header">
+            <h2 id="configuracoes-title">Configurações do sistema</h2>
+            <p>Controle total sobre sua experiência</p>
+          </div>
+
+          <div class="grid-2 mb-4">
+            <div>
+              <h3 class="mb-2">Acesso e privacidade</h3>
+              <div class="form-group">
+                <label class="form-label" for="profileVisibility">Quem pode ver meu perfil?</label>
+                <select class="form-control" id="profileVisibility">
+                  <option value="private">Apenas eu</option>
+                  <option value="community">Comunidade (sem nome)</option>
+                  <option value="public">Público (com nome)</option>
+                </select>
+                <span class="form-hint">Define como você aparece nas mensagens da Comunidade.</span>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="dataStorage">Salvar dados localmente</label>
+                <select class="form-control" id="dataStorage">
+                  <option value="local">No meu navegador</option>
+                  <option value="session">Não salvar (apenas sessão)</option>
+                </select>
+              </div>
+              <div class="task-list no-scroll">
+                <div class="option-row"><label for="allowNotifications">Permitir notificações do navegador</label><input type="checkbox" id="allowNotifications"></div>
+                <div class="option-row"><label for="anonymousMode">Modo anônimo na comunidade</label><input type="checkbox" id="anonymousMode"></div>
+                <div class="option-row"><label for="interfaceSounds">Sons de aviso e feedback</label><input type="checkbox" id="interfaceSounds" checked></div>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="mb-2">Gerenciamento de dados</h3>
+              <div class="card static mb-2">
+                <h4 class="card-title">Exportar meus dados</h4>
+                <p class="mb-2">Faça backup de tudo que criou, em um arquivo JSON.</p>
+                <button type="button" class="btn btn-primary w-100" data-action="export-data"><svg class="icon" aria-hidden="true"><use href="#i-download"></use></svg> Exportar tudo</button>
+              </div>
+              <div class="card static mb-2">
+                <h4 class="card-title">Importar dados</h4>
+                <p class="mb-2">Restaure um backup ou importe um modelo de categorias.</p>
+                <div class="form-group">
+                  <label class="sr-only" for="importFile">Arquivo de backup</label>
+                  <input type="file" id="importFile" class="form-control" accept=".json,application/json">
+                </div>
+                <button type="button" class="btn btn-secondary w-100" id="import-button" data-action="import-data" disabled><svg class="icon" aria-hidden="true"><use href="#i-upload"></use></svg> Importar</button>
+              </div>
+              <div class="card static mb-2">
+                <h4 class="card-title">Redefinir sistema</h4>
+                <p class="mb-2">Começar do zero novamente.</p>
+                <button type="button" class="btn btn-danger w-100" data-action="reset-system">Redefinir tudo</button>
+              </div>
+              <div class="card static" id="installGroup" hidden>
+                <h4 class="card-title">Instalar aplicativo</h4>
+                <p class="mb-2">Use o Kynoa como aplicativo, inclusive sem internet.</p>
+                <button type="button" class="btn btn-secondary w-100" data-action="install-app">Instalar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card static">
+            <h3 class="card-title">Sobre o Kynoa <small id="appVersion"></small></h3>
+            <div class="grid-2">
+              <div>
+                <h4 class="mb-1">Princípios</h4>
+                <ul>
+                  <li>Controle total do usuário</li>
+                  <li>Inclusivo em gênero e neurodiversidade</li>
+                  <li>Começar do zero, sem padrões</li>
+                  <li>Flexível e adaptável</li>
+                  <li>Seus dados ficam apenas no seu navegador</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="mb-1">Acessibilidade</h4>
+                <p>Este sistema é construído para ser adaptado por cada pessoa conforme suas necessidades. Não há maneira "certa" de usá-lo.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <div class="focus-bar" role="group" aria-label="Controles do modo foco">
+    <div class="focus-bar-clock" id="focusBarClock">25:00</div>
+    <div class="focus-bar-info">
+      <strong id="focusBarTask">Sem tarefa específica</strong>
+      <span id="focusBarPhase">Pronto para começar</span>
+    </div>
+    <button type="button" class="btn btn-sm btn-primary" data-action="focus-toggle"><svg class="icon" aria-hidden="true"><use href="#i-timer"></use></svg> <span id="focusBarToggleLabel">Iniciar</span></button>
+    <button type="button" class="btn btn-sm btn-ghost" data-action="focus-mode-off">Sair</button>
+  </div>
+</body>
+</html>
